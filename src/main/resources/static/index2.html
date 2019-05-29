@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Mi punto de venta</title>
+	<meta http-equiv="Cache-control" content="public">
+	<meta http-equiv="Cache-control" content="private">
+	<meta http-equiv="Cache-control" content="no-cache">
+	<meta http-equiv="Cache-control" content="no-store">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="mobile-web-app-capable" content="yes">
+	<link rel="shortcut icon" sizes="192x192" href="">
+	<link href="/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<link rel="stylesheet" href="/css/login.css">
+	<script src="/js/vue.js"></script>
+	<script src="/js/axios.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+	<div id="app">
+
+		<div class="alert alert-primary" role="alert">
+				
+				<button type="button" class="btn btn-link" v-if="opcion!='menu'" @click="opcion='menu'"><i class="fas fa-jedi"></i></button>
+			Sistema LaSallePOS
+		</div>
+
+		<ul class="list-group" v-if="opcion=='menu'">
+			<li class="list-group-item" @click="opcion='categoria'">Categoria</li>
+			<li class="list-group-item" @click="opcion='producto'"> Productos</li>
+			<li class="list-group-item">Terminales</li>
+			<li class="list-group-item">Abrir/Cerrar Cajas</li>
+			<li class="list-group-item">Ventas</li>
+		</ul>
+		<my-hello v-if="opcion=='hello'"></my-hello>
+
+
+		<my-categories v-bind:categoria="categoria" v-if="opcion=='categoria'"></my-categories>
+		<my-products v-bind:categoria="categoria" v-bind:productos="productos" v-if="opcion=='producto'"></my-products>
+
+	</div>
+	<script type="text/javascript" src="/js/main.js"></script>
+</body>
+
+</html>

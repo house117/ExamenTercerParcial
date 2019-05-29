@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+	<title>Materias</title>
+	<meta http-equiv="Cache-control" content="public">
+	<meta http-equiv="Cache-control" content="private">
+	<meta http-equiv="Cache-control" content="no-cache">
+	<meta http-equiv="Cache-control" content="no-store">
+	<script src="/js/vue.js"></script>
+	<script src="/js/axios.min.js"></script>
+		
+    <style>
+        .box{
+            margin-top: 16px;
+            border:1px solid darkblue; padding: 8px; width: 700px;
+        }
+        .resp_block{
+            padding-top: 8px 
+        }
+    </style>
+</head>
+<body>
+    <h2>Preguntas de exámenes</h2>
+    <pre>
+    <b>Bienvenido</b>, por favor introduzca las preguntas que desee,<br> &nbsp;&nbsp;&nbsp;también debe seleccionar de qué materia será la pregunta
+    </pre>
+    <div id="app">
+        <p>
+        <button @click="fn_ver">Enviar al servidor</button>
+        <a href="/listaMaterias.html">Ir a lista de Materias</a>
+        </p>
+        <div class="box">
+            <label for="preg">Pregunta</label>
+            <input type="text" name="preg" size="85" v-model="current_preg" @keyup.enter="fn_add"><br>
+            <label for="preg">Materia</label>
+            <select class="browser-default custom-select" v-model="current_preg_mat" name="categoria">
+                <option v-for="materia in materias">
+                {{ materia.nombre }}
+                </option>
+                </select><br><br>
+            <input type="button" value="+" @click="fn_add" >
+        </div>
+        <ul v-if="pregs.length>0">
+            <li v-for="(preg,index) in pregs">{{preg.desc}} <button @click="fn_remove_question(index)">x</button><br>
+                <respuesta-component v-bind:index="index" v-bind:preg="preg"></respuesta-component>
+            </li>
+        </ul>
+    </div>
+    <pre>Esto no tiene validaciones sobre textos u obligatoriedad de respuestas, pero es la base.</pre>
+</body>
+<script type="text/javascript" src="/js/main.js"></script>
+
+</html>
